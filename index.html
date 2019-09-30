@@ -193,11 +193,12 @@
 <h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
 
 <p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-<h3 id="关于windows系统网络配置说明"><a href="#关于windows系统网络配置说明" class="headerlink" title="关于windows系统网络配置说明"></a>关于windows系统网络配置说明</h3><p>1、通过ssh集成github,如果不需要使用代理，则只需要在C:\Users\Administrator\.ssh目录下，新增config文件，即可</p>
+<h3 id="关于windows系统网络配置及其他说明"><a href="#关于windows系统网络配置及其他说明" class="headerlink" title="关于windows系统网络配置及其他说明"></a>关于windows系统网络配置及其他说明</h3><p>1、通过ssh集成github,如果不需要使用代理，则只需要在C:\Users\Administrator\.ssh目录下，新增config文件，即可</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host github github.com</span><br><span class="line">User git</span><br><span class="line">Hostname github.com</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
 
 <p>如果需要代理，则需安装ssh-https-tunnel</p>
 <p>2、提交文件到github远程空间，需要本地生成秘钥，然后将秘钥内容同步到github空间上去<br>本地秘钥文件C:\Users\Administrator.ssh\id_rsa.pub，复制内容，进入githut，点settings,新增SSH keys，粘贴保存</p>
+<p>3、github上创建的空间名，格式一定要严格按照“&lt;自己的用户名&gt;.github.io”格式，否则会没有主题渲染</p>
 
       
 
