@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="https://xianhongzou.github.io">
   <title>knowage中实现ldap登录 | Hexo</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="本次介绍如何修改knowage登录方式，实现ldap校验登录的. Quick Start1、登录方式123knowage有多种登录校验方式：1）数据库密码验证登录2）ldap登录  2、环境准备121、需要自己搭建ldap环境2、ldap中与knowage数据库中同时存在用户信息  ###3、修改配置 1231、修改\knowageldapsecurityprovider模块下的配置文件ldap_">
+  <meta name="description" content="knowage支持多种登录校验方式：1）数据库密码验证登录2）ldap登录3)自己定制单点登录 本次介绍如何修改knowage登录方式，实现ldap校验登录的. 1、环境准备1）、需要自己搭建ldap环境2）、ldap中与knowage数据库中同时存在用户信息 2、修改配置1）、修改\knowageldapsecurityprovider模块下的配置文件ldap_authorizations.pr">
 <meta name="keywords" content="good">
 <meta property="og:type" content="article">
 <meta property="og:title" content="knowage中实现ldap登录">
 <meta property="og:url" content="https://xianhongzou.github.io/2019/10/08/kw-ldap/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="本次介绍如何修改knowage登录方式，实现ldap校验登录的. Quick Start1、登录方式123knowage有多种登录校验方式：1）数据库密码验证登录2）ldap登录  2、环境准备121、需要自己搭建ldap环境2、ldap中与knowage数据库中同时存在用户信息  ###3、修改配置 1231、修改\knowageldapsecurityprovider模块下的配置文件ldap_">
+<meta property="og:description" content="knowage支持多种登录校验方式：1）数据库密码验证登录2）ldap登录3)自己定制单点登录 本次介绍如何修改knowage登录方式，实现ldap校验登录的. 1、环境准备1）、需要自己搭建ldap环境2）、ldap中与knowage数据库中同时存在用户信息 2、修改配置1）、修改\knowageldapsecurityprovider模块下的配置文件ldap_authorizations.pr">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2019-10-08T16:09:26.869Z">
+<meta property="og:updated_time" content="2019-10-08T16:16:55.878Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="knowage中实现ldap登录">
-<meta name="twitter:description" content="本次介绍如何修改knowage登录方式，实现ldap校验登录的. Quick Start1、登录方式123knowage有多种登录校验方式：1）数据库密码验证登录2）ldap登录  2、环境准备121、需要自己搭建ldap环境2、ldap中与knowage数据库中同时存在用户信息  ###3、修改配置 1231、修改\knowageldapsecurityprovider模块下的配置文件ldap_">
+<meta name="twitter:description" content="knowage支持多种登录校验方式：1）数据库密码验证登录2）ldap登录3)自己定制单点登录 本次介绍如何修改knowage登录方式，实现ldap校验登录的. 1、环境准备1）、需要自己搭建ldap环境2）、ldap中与knowage数据库中同时存在用户信息 2、修改配置1）、修改\knowageldapsecurityprovider模块下的配置文件ldap_authorizations.pr">
   
     <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
   
@@ -179,16 +179,11 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>本次介绍如何修改knowage登录方式，实现ldap校验登录的.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="1、登录方式"><a href="#1、登录方式" class="headerlink" title="1、登录方式"></a>1、登录方式</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">knowage有多种登录校验方式：</span><br><span class="line">1）数据库密码验证登录</span><br><span class="line">2）ldap登录</span><br></pre></td></tr></table></figure>
-
-<h3 id="2、环境准备"><a href="#2、环境准备" class="headerlink" title="2、环境准备"></a>2、环境准备</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">1、需要自己搭建ldap环境</span><br><span class="line">2、ldap中与knowage数据库中同时存在用户信息</span><br></pre></td></tr></table></figure>
-
-<p>###3、修改配置</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">1、修改\knowageldapsecurityprovider模块下的配置文件ldap_authorizations.properties</span><br><span class="line">将内容改为自己的ldap信息</span><br><span class="line">2、修改系统参数SPAGOBI.SECURITY.USER-PROFILE-FACTORY-CLASS.className，值改为it.eng.spagobi.security.ProfiledLdapSecurityServiceSupplier</span><br></pre></td></tr></table></figure>
-
-<p><a href="http://directory.apache.org/api/java-api.html" target="_blank" rel="noopener">LDAP参考</a></p>
-<h3 id="4、登录验证"><a href="#4、登录验证" class="headerlink" title="4、登录验证"></a>4、登录验证</h3><p>1、重启服务生效<br>2、登录界面中输入ldap系统的用户信息，即可实现ldap验证登录</p>
+        <p>knowage支持多种登录校验方式：<br>1）数据库密码验证登录<br>2）ldap登录<br>3)自己定制单点登录</p>
+<p>本次介绍如何修改knowage登录方式，实现ldap校验登录的.</p>
+<h3 id="1、环境准备"><a href="#1、环境准备" class="headerlink" title="1、环境准备"></a>1、环境准备</h3><p>1）、需要自己搭建ldap环境<br>2）、ldap中与knowage数据库中同时存在用户信息</p>
+<h3 id="2、修改配置"><a href="#2、修改配置" class="headerlink" title="2、修改配置"></a>2、修改配置</h3><p>1）、修改\knowageldapsecurityprovider模块下的配置文件ldap_authorizations.properties<br>将内容改为自己的ldap信息<br>2）、修改系统参数SPAGOBI.SECURITY.USER-PROFILE-FACTORY-CLASS.className，值改为it.eng.spagobi.security.ProfiledLdapSecurityServiceSupplier<br><a href="http://directory.apache.org/api/java-api.html" target="_blank" rel="noopener">LDAP参考</a></p>
+<h3 id="3、登录验证"><a href="#3、登录验证" class="headerlink" title="3、登录验证"></a>3、登录验证</h3><p>1）、重启服务生效<br>2）、登录界面中输入ldap系统的用户信息，即可实现ldap验证登录</p>
 <h3 id="可能会遇到的问题"><a href="#可能会遇到的问题" class="headerlink" title="可能会遇到的问题"></a>可能会遇到的问题</h3><p>1、ldap_authorizations.properties配置文件找不到<br>解决办法：knowage给的办法是读取jvm的变量获取文件路径，如果读不到可以直接写死为服务器的绝对路径</p>
 <p>2、ldap校验失败<br>解决办法：与ldap服务联调，确认角色、用户名、密码都正确</p>
 <p>3、校验通过后登录成功，但界面是空的<br>解决办法：检查sbi_user表的用户状态配置是否都有效，特别注意的是flg_pwd_blockd必须是1</p>
