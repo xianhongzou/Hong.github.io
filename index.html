@@ -187,7 +187,7 @@
 <h3 id="3、登录验证"><a href="#3、登录验证" class="headerlink" title="3、登录验证"></a>3、登录验证</h3><p>1）、重启服务生效<br>2）、登录界面中输入ldap系统的用户信息，即可实现ldap验证登录</p>
 <h3 id="可能会遇到的问题"><a href="#可能会遇到的问题" class="headerlink" title="可能会遇到的问题"></a>可能会遇到的问题</h3><p>1、ldap_authorizations.properties配置文件找不到<br>解决办法：knowage给的办法是读取jvm的变量获取文件路径，如果读不到可以直接写死为服务器的绝对路径</p>
 <p>2、ldap校验失败<br>解决办法：与ldap服务联调，确认角色、用户名、密码都正确</p>
-<p>3、校验通过后登录成功，但界面是空的<br>解决办法：检查sbi_user表的用户状态配置是否都有效，特别注意的是flg_pwd_blockd必须是1</p>
+<p>3、校验通过后登录成功，但界面是空的<br>解决办法：检查sbi_user表的用户状态配置是否都有效，特别注意的是flg_pwd_blockd必须为空</p>
 
       
 
