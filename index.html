@@ -160,34 +160,16 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-kw-ldap" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-13.Knowage租户管理-环境共享与独立" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/08/kw-ldap/">knowage中实现ldap登录</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/08/kw-ldap/" class="archive-article-date">
-  	<time datetime="2019-10-08T15:45:53.727Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-08</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>knowage支持多种登录校验方式：<br>1）数据库密码验证登录<br>2）ldap登录<br>3)自己定制单点登录</p>
-<p>本次介绍如何修改knowage登录方式，实现ldap校验登录的.</p>
-<h3 id="1、环境准备"><a href="#1、环境准备" class="headerlink" title="1、环境准备"></a>1、环境准备</h3><p>1）、需要自己搭建ldap环境<br>2）、ldap中与knowage数据库中同时存在用户信息</p>
-<h3 id="2、修改配置"><a href="#2、修改配置" class="headerlink" title="2、修改配置"></a>2、修改配置</h3><p>1）、修改\knowageldapsecurityprovider模块下的配置文件ldap_authorizations.properties<br>将内容改为自己的ldap信息<br>2）、修改系统参数SPAGOBI.SECURITY.USER-PROFILE-FACTORY-CLASS.className，值改为it.eng.spagobi.security.ProfiledLdapSecurityServiceSupplier<br><a href="http://directory.apache.org/api/java-api.html" target="_blank" rel="noopener">LDAP参考</a></p>
-<h3 id="3、登录验证"><a href="#3、登录验证" class="headerlink" title="3、登录验证"></a>3、登录验证</h3><p>1）、重启服务生效<br>2）、登录界面中输入ldap系统的用户信息，即可实现ldap验证登录</p>
-<h3 id="可能会遇到的问题"><a href="#可能会遇到的问题" class="headerlink" title="可能会遇到的问题"></a>可能会遇到的问题</h3><p>1、ldap_authorizations.properties配置文件找不到<br>解决办法：knowage给的办法是读取jvm的变量获取文件路径，如果读不到可以直接写死为服务器的绝对路径</p>
-<p>2、ldap校验失败<br>解决办法：与ldap服务联调，确认角色、用户名、密码都正确</p>
-<p>3、校验通过后登录成功，但界面是空的<br>解决办法：检查sbi_user表的用户状态配置是否都有效，特别注意的是flg_pwd_blockd必须为空</p>
+        <h1 id="Knowage租户管理-环境共享与独立"><a href="#Knowage租户管理-环境共享与独立" class="headerlink" title="Knowage租户管理-环境共享与独立"></a>Knowage租户管理-环境共享与独立</h1><h2 id="多租户"><a href="#多租户" class="headerlink" title="多租户"></a>多租户</h2><p>同一套程序下实现多用户数据的隔离。</p>
+<h2 id="为什么要用多租户"><a href="#为什么要用多租户" class="headerlink" title="为什么要用多租户"></a>为什么要用多租户<br></h2><p>knowage租户即为租用knowage报表系统，设计和管理自己组织的报表。一个租户对应就是一个组织，可以通过租户实现报表数据的隔离，只有本租户下的用户可以管理查看自己的报表，比如某些生产敏感信息可以通过租户进行隔离，其次是能横向扩展报表系统的维度，使报表数据更具结构性，避免单个空间中的报表数据过于臃肿，查看起来很不方便。</p>
+<h2 id="租户新增与使用"><a href="#租户新增与使用" class="headerlink" title="租户新增与使用"></a>租户新增与使用<br></h2><h3 id="1、添加租户"><a href="#1、添加租户" class="headerlink" title="1、添加租户"></a>1、添加租户<br></h3><p>在数据库表sbi_organizations、sbi_organization_product_type、sbi_user、sbi_ext_roles、sbi_ext_user_roles新增租户及用户角色。</p>
+<h3 id="2、登录使用"><a href="#2、登录使用" class="headerlink" title="2、登录使用"></a>2、登录使用<br></h3><p>1）knowageCE未提供按租户登陆的功能，需要修改代码，在登录界面放开租户信息，并修改登录验证逻辑，使登录后进入到自己的空间下<br><br><img src="./kwdoc13.png" alt="image"><br></p>
+<p>2）登录到新空间后，就相当于独立拥有了一套knowage环境，管理员可以做任何操作<br></p>
 
       
 
@@ -200,7 +182,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/08/kw-ldap/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/02/03/13.Knowage租户管理-环境共享与独立/">展开全文 >></a>
         </p>
       
 
@@ -230,45 +212,12 @@
 
 
   
-    <article id="post-hexoprogram" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-k3.Knowage实现输入字段的中文支持" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/09/30/hexoprogram/">首次创建hexo项目简介</a>
-    </h1>
-  
-
-        
-        <a href="/2019/09/30/hexoprogram/" class="archive-article-date">
-  	<time datetime="2019-09-30T01:17:50.313Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-09-30</time>
-</a>
-        
-      </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br><span class="line">简写：</span><br><span class="line">$ hexo g</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br><span class="line">简写：</span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo d -g</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-<h3 id="关于windows系统网络配置及其他说明"><a href="#关于windows系统网络配置及其他说明" class="headerlink" title="关于windows系统网络配置及其他说明"></a>关于windows系统网络配置及其他说明</h3><p>1、通过ssh集成github,如果不需要使用代理，则只需要在C:\Users\Administrator\.ssh目录下，新增config文件，即可</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Host github github.com</span><br><span class="line">User git</span><br><span class="line">Hostname github.com</span><br><span class="line">IdentityFile ~/.ssh/id_rsa</span><br></pre></td></tr></table></figure>
-
-<p>如果需要代理，则需安装ssh-https-tunnel</p>
-<p>2、提交文件到github远程空间，需要本地生成秘钥，然后将秘钥内容同步到github空间上去<br>本地秘钥文件C:\Users\Administrator.ssh\id_rsa.pub，复制内容，进入githut，点settings,新增SSH keys，粘贴保存</p>
-<p>3、github上创建的空间名，格式一定要严格按照“&lt;自己的用户名&gt;.github.io”格式，否则会没有主题渲染</p>
+        <p>Knowage 引入Chart 和 Report</p>
 
       
 
@@ -281,7 +230,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/09/30/hexoprogram/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/01/29/k3.Knowage实现输入字段的中文支持/">展开全文 >></a>
         </p>
       
 
@@ -311,6 +260,400 @@
 
 
   
+    <article id="post-k2.Knowage实现图表个性化样式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Knowage 引入Chart 和 Report</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/29/k2.Knowage实现图表个性化样式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-k1.Knowage实现页面数据异步刷新" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Knowage 引入Chart 和 Report</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/29/k1.Knowage实现页面数据异步刷新/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-3.Knowage多级权限控制，细到可怕" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Knowage权限"><a href="#Knowage权限" class="headerlink" title="Knowage权限"></a>Knowage权限</h1><p>knowage组件围绕报表采取多级权限控制，以至于对不同使用场景加以区分，实现对各个维度的功能精细化管理，其中包括报表的访问、用户角色、菜单功能树、参数等</p>
+<p>#角色分类<br>knowage为用户划分了很多角色，每个觉得的权限都不一样，包括工作空间、使用数据集、管理权限、启用不同功能权限、商业模式等，常见的有以下几种角色：<br>管理员<br>开发者<br>普通用户<br>测试用户</p>
+<h1 id="报表"><a href="#报表" class="headerlink" title="报表"></a>报表</h1><p>报表必须挂载到功能树下，对功能树进行权限管理，包括可开发、测试、执行、创建<br><img src="./kwdoc4.png" alt="img"></p>
+<h1 id="参数"><a href="#参数" class="headerlink" title="参数"></a>参数</h1><p>对报表参数，可将参数的访问权限分配给不同的角色<br><img src="./kwdoc5.png" alt="img"></p>
+<h1 id="菜单"><a href="#菜单" class="headerlink" title="菜单"></a>菜单</h1><p>菜单是快速查看报表的快捷方式，在每个菜单上，可以自有分配给所有角色开发、测试、执行、创建等权限,与功能树一样。菜单的权限在结构上具有可传递性，即父菜单的权限给传递给子菜单，子菜单的权限只能小于等于父菜单权限。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/29/3.Knowage多级权限控制，细到可怕/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-12.Knowage 引入Chart 和 Report" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Knowage-引入Chart-和-Report"><a href="#Knowage-引入Chart-和-Report" class="headerlink" title="Knowage 引入Chart 和 Report"></a>Knowage 引入Chart 和 Report</h1><p>在线制作报表，可以引入另一个报表作为一个部件到当前报表中,如下<br><img src="./kwdoc11.png" alt="img"><br><img src="./kwdoc12.png" alt="img"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/09/12.Knowage 引入Chart 和 Report/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-11.Knowage实现完美的Dashborad" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Knowage实现完美的Dashborad</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/09/11.Knowage实现完美的Dashborad/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-10.Knowage Html组件实现个性化页面" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Knowage Html组件实现个性化页面</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/09/10.Knowage Html组件实现个性化页面/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-9.Knowage高级表格——交叉报表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="Knowage高级表格——交叉报表"><a href="#Knowage高级表格——交叉报表" class="headerlink" title="Knowage高级表格——交叉报表"></a>Knowage高级表格——交叉报表</h1><p>交叉报表是普通表格的升级版，可以将表头进行分层，对度量的数据进行一定程度的概括。交叉报表在birt或cockpit在线编辑都可以实现。</p>
+<h1 id="普通表格与交叉表的区别展示："><a href="#普通表格与交叉表的区别展示：" class="headerlink" title="普通表格与交叉表的区别展示："></a>普通表格与交叉表的区别展示：</h1><p>普通表：<br><img src="./kwdoc9.png" alt="img"><br>交叉表：<br><img src="./kwdoc10.png" alt="img"></p>
+<h1 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h1><p>请参考：<a href>交叉报表指导说明</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/09/9.Knowage高级表格——交叉报表/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-8.Knowage实现不一样的表格" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Knowage实现不一样的表格</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/09/8.Knowage实现不一样的表格/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
   
 
 
@@ -321,7 +664,7 @@
   <div class="outer">
     <div id="footer-info">
     	<div class="footer-left">
-    		&copy; 2019 Yang hong
+    		&copy; 2021 Yang hong
     	</div>
       	<div class="footer-right">
       		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
