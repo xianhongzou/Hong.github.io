@@ -160,14 +160,169 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-9.Knowage高级表格——交叉报表" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-kw-ldap" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/12/kw-ldap/">knowage中实现ldap登录</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/12/kw-ldap/" class="archive-article-date">
+  	<time datetime="2021-01-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>knowage支持多种登录校验方式：<br>1）数据库密码验证登录<br>2）ldap登录<br>3)自己定制单点登录</p>
+<p>本次介绍如何修改knowage登录方式，实现ldap校验登录的.</p>
+<h3 id="1、环境准备"><a href="#1、环境准备" class="headerlink" title="1、环境准备"></a>1、环境准备</h3><p>1）、需要自己搭建ldap环境<br>2）、ldap中与knowage数据库中同时存在用户信息</p>
+<h3 id="2、修改配置"><a href="#2、修改配置" class="headerlink" title="2、修改配置"></a>2、修改配置</h3><p>1）、修改\knowageldapsecurityprovider模块下的配置文件ldap_authorizations.properties<br>将内容改为自己的ldap信息<br>2）、修改系统参数SPAGOBI.SECURITY.USER-PROFILE-FACTORY-CLASS.className，值改为it.eng.spagobi.security.ProfiledLdapSecurityServiceSupplier<br><a href="http://directory.apache.org/api/java-api.html" target="_blank" rel="noopener">LDAP参考</a></p>
+<h3 id="3、登录验证"><a href="#3、登录验证" class="headerlink" title="3、登录验证"></a>3、登录验证</h3><p>1）、重启服务生效<br>2）、登录界面中输入ldap系统的用户信息，即可实现ldap验证登录</p>
+<h3 id="可能会遇到的问题"><a href="#可能会遇到的问题" class="headerlink" title="可能会遇到的问题"></a>可能会遇到的问题</h3><p>1、ldap_authorizations.properties配置文件找不到<br>解决办法：knowage给的办法是读取jvm的变量获取文件路径，如果读不到可以直接写死为服务器的绝对路径</p>
+<p>2、ldap校验失败<br>解决办法：与ldap服务联调，确认角色、用户名、密码都正确</p>
+<p>3、校验通过后登录成功，但界面是空的<br>解决办法：检查sbi_user表的用户状态配置是否都有效，特别注意的是flg_pwd_blockd必须为空</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/knowage//" class="article-tag-list-link color3">knowage</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/12/kw-ldap/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-6.Knowage数据集联合实现图表联动" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2021/01/12/6.Knowage数据集联合实现图表联动/">Knowage数据集联合实现图表联动</a>
+    </h1>
+  
+
+        
+        <a href="/2021/01/12/6.Knowage数据集联合实现图表联动/" class="archive-article-date">
+  	<time datetime="2021-01-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2021-01-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>数据集联合，是指在同一个dashboard中有多个报表，对应的多个数据集，通过将数据集之间的某些字段关联起来，实现操作其中一个报表时，另一个报表随之变化的效果。</p>
+<h1 id="作用及效果"><a href="#作用及效果" class="headerlink" title="作用及效果"></a>作用及效果</h1><p>1、数据集列，数据集参数和文档参数<br>2、图表之间关联展示，增加图表的灵活性<br>示例：<br><img src="./kwdoc9.png" alt="img"></p>
+<h1 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h1><p>实现方案请参考：<a href="https://knowage-suite.readthedocs.io/en/7.1/functionalities-guide/cockpit/index.html" target="_blank" rel="noopener">数据集联动</a></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+	<div class="article-category tagcloud">
+		<i class="icon-book icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="/categories/knowage//" class="article-tag-list-link color3">knowage</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2021/01/12/6.Knowage数据集联合实现图表联动/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-k3.Knowage实现输入字段的中文支持" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="Knowage高级表格——交叉报表"><a href="#Knowage高级表格——交叉报表" class="headerlink" title="Knowage高级表格——交叉报表"></a>Knowage高级表格——交叉报表</h1><p>交叉报表是普通表格的升级版，可以将表头进行分层，对度量的数据进行一定程度的概括。交叉报表在birt或cockpit在线编辑都可以实现。</p>
-<h1 id="普通表格与交叉表的区别展示："><a href="#普通表格与交叉表的区别展示：" class="headerlink" title="普通表格与交叉表的区别展示："></a>普通表格与交叉表的区别展示：</h1><p>普通表：<br><img src="./kwdoc9.png" alt="img"><br>交叉表：<br><img src="./kwdoc10.png" alt="img"></p>
-<h1 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h1><p>请参考：<a href>交叉报表指导说明</a></p>
+        <p>Knowage 引入Chart 和 Report</p>
 
       
 
@@ -180,7 +335,199 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/09/9.Knowage高级表格——交叉报表/">展开全文 >></a>
+          <a class="article-more-a" href="/2020/01/29/k3.Knowage实现输入字段的中文支持/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-k2.Knowage实现图表个性化样式" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Knowage 引入Chart 和 Report</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/29/k2.Knowage实现图表个性化样式/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-k1.Knowage实现页面数据异步刷新" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Knowage 引入Chart 和 Report</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2020/01/29/k1.Knowage实现页面数据异步刷新/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-11.Knowage实现完美的Dashborad" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Knowage实现完美的Dashborad</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/09/11.Knowage实现完美的Dashborad/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-10.Knowage Html组件实现个性化页面" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Knowage Html组件实现个性化页面</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2019/12/09/10.Knowage Html组件实现个性化页面/">展开全文 >></a>
         </p>
       
 
@@ -258,157 +605,6 @@
 
 
   
-    <article id="post-7.Knowage分析利器-OLAP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="OLAP"><a href="#OLAP" class="headerlink" title="OLAP"></a>OLAP</h1><p>OLAP，On line Transaction Processing的简称，即联机分析处理，使用户可以从多个角度交互式分析多维数据。OLAP包含基本分析操作：切片和切块，上滚，下钻和旋转。knowageCE中的OLAP功能没被开放，如果需要使用，需要修改源码</p>
-<h1 id="Mondrian决定一切"><a href="#Mondrian决定一切" class="headerlink" title="Mondrian决定一切"></a>Mondrian决定一切</h1><p>Mondrian是ROLAP工具,它通过基于XML的文件（称为Mondrian模式）将OLAP结构（例如多维数据集，维度和属性）直接映射到关系数据库的表和列上。要做多维分析，必须先学会写Mondrian.xml文件，可参考：<a href="http://mondrian.pentaho.com/" target="_blank" rel="noopener">Mondrian模式</a></p>
-<h1 id="OLAP制作简要过程"><a href="#OLAP制作简要过程" class="headerlink" title="OLAP制作简要过程"></a>OLAP制作简要过程</h1><p>1、编写Mondrian模型文件<br>2、增加Mondrian模型管理<br><img src="./kwdoc6.png" alt="img"><br>3、创建多维分析报表<br><img src="./kwdoc7.png" alt="img"><br><img src="./kwdoc8.png" alt="img"></p>
-<p>官方指导：<a href="https://knowage-suite.readthedocs.io/en/7.1/functionalities-guide/multidimensional-analysis/index.html" target="_blank" rel="noopener">多维分析</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/09/7.Knowage分析利器-OLAP/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-6.Knowage数据集联合实现图表联动" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Knowage数据集联合实现图表联动"><a href="#Knowage数据集联合实现图表联动" class="headerlink" title="Knowage数据集联合实现图表联动"></a>Knowage数据集联合实现图表联动</h1><p>数据集联合，是指在同一个dashboard中有多个报表，对应的多个数据集，通过将数据集之间的某些字段关联起来，实现操作其中一个报表时，另一个报表随之变化的效果。</p>
-<h1 id="作用及效果"><a href="#作用及效果" class="headerlink" title="作用及效果"></a>作用及效果</h1><p>1、数据集列，数据集参数和文档参数<br>2、图表之间关联展示，增加图表的灵活性<br>示例：<br><img src="./kwdoc9.png" alt="img"></p>
-<h1 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h1><p>实现方案请参考：<a href="https://knowage-suite.readthedocs.io/en/7.1/functionalities-guide/cockpit/index.html" target="_blank" rel="noopener">数据集联动</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/09/6.Knowage数据集联合实现图表联动/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-5.Knowage报表查询参数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Knowage报表查询参数"><a href="#Knowage报表查询参数" class="headerlink" title="Knowage报表查询参数"></a>Knowage报表查询参数</h1><p>参数，作为报表查询的条件，大大增加了报表的灵活性，可以根据实际需要动态查询报表内容。knowageCE为报表的条件查询提供了支持，开发人员可以为报表任意定制参数。</p>
-<p>#参数类型<br>已知可用的参数类型：<br>日期<br>数字<br>字符串</p>
-<h1 id="配置参数步骤"><a href="#配置参数步骤" class="headerlink" title="配置参数步骤"></a>配置参数步骤</h1><p>1、定义分析驱动，即提供的参数，确定参数名，参数类型，输入方式，参数权限等<br>2、如果分析驱动选择的参数方式为值列表，还需要在“值列表管理”中增加值列表<br>3、报表使用的数据集，需要将条件查询参数化，注意参数化的方式，在线的数据集和离线的birt有区别<br>4、关联报表和参数，编辑报表，新增报表需要的参数，关联驱动分析</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/09/5.Knowage报表查询参数/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="post-4.Knowage多角色开发流程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -427,108 +623,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/12/09/4.Knowage多角色开发流程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-2.Knowage图表实现数据下钻与上卷" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="钻取与上卷"><a href="#钻取与上卷" class="headerlink" title="钻取与上卷"></a>钻取与上卷</h1><p>在同一个图表中，点击某一元素，可以往下查看更详细维度的度量情况，即着用户可以按配置多次浏览每个类别的详细信息,此为钻取。上卷即向上查看高纬度的度量情况，也可以理解为返回。如下图：<br>示例：</p>
-<p><img src="./kwdoc3.gif" alt="Image text"></p>
-<h1 id="图表"><a href="#图表" class="headerlink" title="图表"></a>图表</h1><p>Knowage组件在线提供了两种图表制作方式，一种是在cockpit中选择chart模板，另一种是创建一般类型的报表，选择图表引擎，定义好数据集，数据集需要区分开属性和度量值，钻取的层次关系与属性的顺序有关：<br><img src="./kwdoc2.png" alt="Image text"><br>然后创建模板，按指导文档操作即可。</p>
-<p>#如何实现</p>
-<p>请参考:<a href="https://knowage-suite.readthedocs.io/en/7.1/functionalities-guide/birt-reporting/index.html" target="_blank" rel="noopener">Knowage官方文档-Chart报表</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/09/2.Knowage图表实现数据下钻与上卷/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-1.Knowage与BIRT集成" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="Knowage与Birt的集成"><a href="#Knowage与Birt的集成" class="headerlink" title="Knowage与Birt的集成"></a>Knowage与Birt的集成</h1><h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>Knowage是专业的开源套件，可在传统来源和大数据系统上进行现代业务分析。该套件由几个模块组成，每个模块都针对特定的分析领域，如大数据、智能情报、企业报告等，我们可以使用的是社区版KnowageCE。Birt是Business Intelligence and Reporting Tools的缩写，是一个开放源代码技术平台，用于创建数据可视化和报告。BIRT报告的开发工具是Knowage Studio设计器，BIRT报告运行在Knowage Server运行时的引擎中。Birt开发主要适用于有一定经验的专业开发人员和管理员。</p>
-<h2 id="Birt优势"><a href="#Birt优势" class="headerlink" title="Birt优势"></a>Birt优势</h2><p>1、允许创建具有不同图形元素（例如交叉表，图表，图像和不同文本区域）的复杂报表，适用于综合分析和详细分析<br><img src="./kwdoc1.png" alt="Image text"><br>2、可移植性强，允许开发人员离线的创建knowage文档或下载在线的分析文档，并进行修改、测试和发布<br>3、支持了开发人员为不同knowage项目开发报表<br>4、数据集灵活，可以是内部SQL或接口，也可以是服务器上的数据模型<br>5、支持交叉导航报表，可以引用任何Knowage文档，实现对起始文档中显示的数据（所有元素）进行更深入的可视化。</p>
-<h2 id="开发步骤"><a href="#开发步骤" class="headerlink" title="开发步骤"></a>开发步骤</h2><p>开发过程请参考：<a href="https://knowage-suite.readthedocs.io/en/7.1/functionalities-guide/birt-reporting/index.html" target="_blank" rel="noopener">Knowage官方文档-Birt报表</a></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/12/09/1.Knowage与BIRT集成/">展开全文 >></a>
         </p>
       
 
@@ -577,76 +671,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2019/11/30/Knowage-theme/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-kw-ldap" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2019/10/08/kw-ldap/">knowage中实现ldap登录</a>
-    </h1>
-  
-
-        
-        <a href="/2019/10/08/kw-ldap/" class="archive-article-date">
-  	<time datetime="2019-10-08T15:45:53.727Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2019-10-08</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>knowage支持多种登录校验方式：<br>1）数据库密码验证登录<br>2）ldap登录<br>3)自己定制单点登录</p>
-<p>本次介绍如何修改knowage登录方式，实现ldap校验登录的.</p>
-<h3 id="1、环境准备"><a href="#1、环境准备" class="headerlink" title="1、环境准备"></a>1、环境准备</h3><p>1）、需要自己搭建ldap环境<br>2）、ldap中与knowage数据库中同时存在用户信息</p>
-<h3 id="2、修改配置"><a href="#2、修改配置" class="headerlink" title="2、修改配置"></a>2、修改配置</h3><p>1）、修改\knowageldapsecurityprovider模块下的配置文件ldap_authorizations.properties<br>将内容改为自己的ldap信息<br>2）、修改系统参数SPAGOBI.SECURITY.USER-PROFILE-FACTORY-CLASS.className，值改为it.eng.spagobi.security.ProfiledLdapSecurityServiceSupplier<br><a href="http://directory.apache.org/api/java-api.html" target="_blank" rel="noopener">LDAP参考</a></p>
-<h3 id="3、登录验证"><a href="#3、登录验证" class="headerlink" title="3、登录验证"></a>3、登录验证</h3><p>1）、重启服务生效<br>2）、登录界面中输入ldap系统的用户信息，即可实现ldap验证登录</p>
-<h3 id="可能会遇到的问题"><a href="#可能会遇到的问题" class="headerlink" title="可能会遇到的问题"></a>可能会遇到的问题</h3><p>1、ldap_authorizations.properties配置文件找不到<br>解决办法：knowage给的办法是读取jvm的变量获取文件路径，如果读不到可以直接写死为服务器的绝对路径</p>
-<p>2、ldap校验失败<br>解决办法：与ldap服务联调，确认角色、用户名、密码都正确</p>
-<p>3、校验通过后登录成功，但界面是空的<br>解决办法：检查sbi_user表的用户状态配置是否都有效，特别注意的是flg_pwd_blockd必须为空</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2019/10/08/kw-ldap/">展开全文 >></a>
         </p>
       
 
